@@ -1,92 +1,107 @@
-## create ros environment (	using win python build tools 0.2.5  )
-
- # extract rosdeps into c:\opt
-	from http://files.yujinrobot.com/win_ros/rosdeps/rosdeps-groovy-x86-vc10.zip
-
- # get sources
-	cd c:\
-	mkdir work
-	cd work
-	winros_init_workspace --track=groovy ws
-		^^ this is for build-tools 0.2.5! can use --track=hydro to choose hydro sources; 0.2.2 uses different options, --sdk...
-		(  fetching sources can take some time  )
+# install required packages/software/tools/...
+	http://devel.iri.upc.edu/docs/roswiki/win_ros(2f)hydro(2f)Msvc(20)Compiled(20)SDK.html#Preparation
 	
- # build ros
-	cd c:\work\ws
+
+# extract rosdeps into C:\opt
+	http://files.yujinrobot.com/win_ros/rosdeps/rosdeps-groovy-x86-vc10.zip
+	--> make sure to use rosdeps-groovy-... for ros-groovy and rosdeps-hydro-... for ros-hydro
+
+# create workspace and fetch sources
+
+	C:\>mkdir work
+	C:\>cd work
+	C:\work>winros_init_workspace --track=groovy ws 						# use win_python_build_tools version 0.2.5
+																			# ..this will fetch ros-groovy sources into specified workspace folder
+
+# build ros "core"
+
+	C:\work>cd ws
+	C:\work\ws>setup
+	C:\work\ws>winros_init_build --track=groovy
+	C:\work\ws>winros_make													# ..this should start build-process and finish with 100%
+	
+# OPTIONAL: install
+
+	C:\work\ws>winros_make --install
+
+
+# create overlay-workspace
+
+	C:\work\ws>cd C:\work
+	C:\work>winros_init_workspace overlay
+	C:\work>cd C:\work\overlay
+	C:\work\overlay>setup.bat
+	C:\work\overlay>winros_init_build --underlays="C:/opt/ros/groovy/x86"	# ..make sure to link to the correct directory,  ..\groovy\.. or ..\hydro\..
+
+!winros_python_build_tools 0.2.5 does not generate correct config.cmake file!
+	--> this will cause an error about "Boost not found"
+	--> to fix this just edit config.cmake as described in the next step
+	
+!	# fix config.cmake in ..\work\overlay\
+		==> change these lines:
+set(ROSDEPS_ROOT "C:/opt/rosdeps/hydro/x86" CACHE STRING "System root for ros dependency.")
+set(INSTALL_ROOT "C:/opt/overlay/hydro/x86" CACHE PATH "Install root.")
+		to:
+set(ROSDEPS_ROOT "C:/opt/rosdeps/groovy/x86" CACHE STRING "System root for ros dependency.")
+set(INSTALL_ROOT "C:/opt/ros/groovy/x86" CACHE PATH "Install root.")
+
+	C:\work\overlay>winros_make												# if this fails because of missing gtest, follow next step, otherwise skip that..
+	
+	# if gtest is missing, fetch sources
+	
+	C:\work\overlay>cd src
+	C:\work\overlay\src>svn checkout http://googletest.googlecode.com/svn/tags/release-1.6.0 gtest
+	
+	# try to build again
+	
+	C:\work\overlay\src>cd ..
+	C:\work\overlay>winros_make
+	
+
+# add source-package: common_tutorials
+	
+	cd C:\work\overlay\src				# if overlay is not working as it should (see above), use C:\work\ws ..
+	wstool set common_tutorials --git https://github.com/ros/common_tutorials.git	# confirm with "y"
+	wstool update common_tutorials													# fetch sources for common_tutorials
+
+# build new package
+
+	cd C:/work/overlay					# if overlay is not working as it should (see above), use C:\work\ws ..	
+	winros_make --pre-clean				#.. should finish build with 100%
+	
+	# on errors see Troubleshooting:
+		--> nodelet_tutorial_math
+		--> pluginlib_tutorials
+		--> turtle_actionlib
+
+# test actionlib_tutorials
+	
+	* open new terminal
+	cd C:\work\ws\devel
 	setup.bat
-	winros_init_build --track=groovy
-	winros_make
-		^^ MUST finish with: "... [100%] Built target winros_create_pkg_exe"
-	winros_make --install
-		^^ install built stuff into c:\opt\ros\groovy ...
-
-####
-		
- # create ros-groovy overlay
-	cd C:/work
-	winros_init_workspace overlay
-	cd C:/work/overlay
+	roscore										# start ros-master
+	
+	* open new terminal
+	cd C:\work\ws\devel
 	setup.bat
-	winros_init_build --underlays="C:/opt/ros/groovy/x86"
-		^^ use ..\ros\hydro\x86 for ros-hydro
- # download missing gtest package
-	cd src
-	svn checkout http://googletest.googlecode.com/svn/tags/release-1.6.0 gtest
-	cd ..
+	rostopic echo /fibonacci/result				# listen on topic
+
+	* open new terminal
+	cd C:\work\ws\devel
+	setup.bat
+	rosrun actionlib_tutorials fibonacci_server			# start fibonacci-server
+
+	* open new terminal
+	cd C:\work\ws\devel
+	setup.bat
+	rosrun actionlib_tutorials fibonacci_client			# start fibonacci-client
 	
- # build overlay workspace
-	winros_make
-	
- # create package learning_actionlib
-	c:\work\overlay\devel\setup.bat
-	cd c:\work\overlay\src
-	winros_create_pkg learning_actionlib actionlib message_generation roscpp rospy std_msgs actionlib_msgs
-	
- # create Action messages
-	(  http://wiki.ros.org/actionlib_tutorials/Tutorials/SimpleActionServer%28ExecuteCallbackMethod%29#Creating_the_Action_Messages  )
+
+###########################################################################
+# Troubleshooting
  
-	mkdir c:\work\overlay\src\learning_actionlib\action
-	touch c:\work\overlay\src\learning_actionlib\action\Fibonacci.action
-	### insert file content into .action file
-		^^ make sure to use correct line-endings format!
-
-	
-?# configure C:\work\overlay\src\learning_actionlib\CMakeLists.txt for the action messages
-	notepad++ C:\work\overlay\src\learning_actionlib\CMakeLists.txt
-	
- # generate msg files
-	python c:\opt\ros\groovy\x86\lib\actionlib_msgs\genaction.py -o c:\work\overlay\src\learning_actionlib\msg c:\work\overlay\src\learning_actionlib\action\Fibonacci.action
-	
- # enter c++ source code into learning_actionlib/src/fibonacci_server.cpp
-	http://wiki.ros.org/actionlib_tutorials/Tutorials/SimpleActionServer%28ExecuteCallbackMethod%29#The_Code
-
- # add fibonacci_server to CMakeLists.txt
-	http://wiki.ros.org/actionlib_tutorials/Tutorials/SimpleActionServer%28ExecuteCallbackMethod%29#Compiling_and_Running_the_Action
- 
-	
- # compile
-
- # ...boost.. .dll error: missing file..
- # ... nmake seems to run "empty"
- # ...
- 
-
-###### -> 1st: try without overlay
-
- # WITHOUT overlay
- 
- 
-
-###### -> 2nd: try with downloaded actionlib_tutorial package to avoid errors in catkin config etc.. 
-
-
-
-
-
-	
-#############################################################################################
-Troubleshooting:
 * Boost-Errors
+	--> make sure you extracted the correct package for your ros-version. there are different downloads for groovy and hydro!
 	--> forgot to extract rosdeps into c:\opt
 * genaction.py gets opened in editor instead of being called to generate msg-files
 	--> https://3c.gmx.net/mail/client/dereferrer?redirectUrl=http%3A%2F%2Fstackoverflow.com%2Fquestions%2F7690150%2Fpython-sys-argv-out-of-range-dont-understand-why
@@ -95,6 +110,30 @@ Troubleshooting:
 	--> solution is described in error-message:
 		You can run 'svn checkout http://googletest.googlecode.com/svn/tags/release-1.6.0 gtest' in the root of your workspace
 		--> root of workspace means c:\work\overlay\src
-* error because of windows/unix line-endings
+* error because of windows/unix line-endings in .cpp or other files
 	--> use notepad++: edit -> line-endings conversion --> Unix-style
+	
+* nodelet - errors:
+	--> remove folder "nodelet_tutorial_math" from ..\src\common_tutorials
+* pluginlib - errors:
+	--> remove folder "pluginlib_tutorials" from ..\src\common_tutorials
+* turtle_actionlib - errors:
+	--> remove folder "turtle_actionlib" from ..\src\common_tutorials
+	
+	
+###########################################################################
+# Issues to take a look at:
 
+* Boost not found if using overlay instead of "full"-workspace
+	--> no idea yet, maybe dependencies are not correctly setup or some environment variable is missing?
+		.. Boost does exist since "full"-workspace can find it..
+		
+* "nodelet_tutorial_math"
+	--> why does it not build/install?
+* "pluginlib_tutorials"
+	--> why does it not build/install?
+* "turtle_actionlib"
+	--> why does it not build/install?
+
+* not working tutorials:
+	--> should update package.xml's and CMakeLists.txt and remove those packages from there, too!
