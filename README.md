@@ -127,6 +127,7 @@ set(INSTALL_ROOT "C:/opt/ros/groovy/x86" CACHE PATH "Install root.")
 * Boost not found if using overlay instead of "full"-workspace
 	--> no idea yet, maybe dependencies are not correctly setup or some environment variable is missing?
 		.. Boost does exist since "full"-workspace can find it..
+	==> should be solved after fixing config.cmake; see above
 		
 * "nodelet_tutorial_math"
 	--> why does it not build/install?
