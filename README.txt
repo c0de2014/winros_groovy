@@ -123,7 +123,6 @@ set(INSTALL_ROOT "C:/opt/ros/groovy/x86" CACHE PATH "Install root.")
 * turtle_actionlib - errors:
 	--> remove folder "turtle_actionlib" from ..\src\common_tutorials
 	
-	
 
 ###########
 
@@ -180,6 +179,8 @@ set(INSTALL_ROOT "C:/opt/ros/groovy/x86" CACHE PATH "Install root.")
   	==> add "std_msgs" as <build_depend> to package.xml
   	==> also add it as <run_depend>
   	
+  then try again to run "winros_make" from workspace-root-folder (e.g. c:\work\overlay )
+  	==> should finish with 100%, and msg-files should have been created
 
 ###########
 	
