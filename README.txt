@@ -160,6 +160,26 @@ set(INSTALL_ROOT "C:/opt/ros/groovy/x86" CACHE PATH "Install root.")
       [		FILES					]
       [		Num.msg					]
       [		)
+      
+  cd ..\..\..
+  setup.bat
+  winros_make --pre-clean
+  
+  --> error because of "depend"-tag in package.xml:
+  	==> remove that tag (maybe replace with build_depend and/or run_depend)
+  --> error because of unknown "CMake command 'catkin_project'"
+  	==> when adding "message_runtime" to "catkin_package"-call, do NOT create "catkin_package"-call new,
+  	    instead rename "catkin_project"-call to "catkin_package" and insert "CATKIN_DEPENDS message_runtime" there;
+  	==> remove the entry: "  INCLUDE_DIRS include" from "catkin_package"
+  --> error: "...Could not find a package configuration file provided by "ROS" ..."
+  	==> in CMakeLists.txt change "find_package( ROS ... )" to
+  	    "find_package( catkin ...)"
+  --> error because of ".. catkin must be listed as a buildtool .."
+  	==> add: "<buildtool_depend>catkin</buildtool_depend>" to package.xml
+  --> error: "catkin_package() the catkin package 'std_msgs' has been find_package()-ed but is not listed as a build dependency in the package.xml"
+  	==> add "std_msgs" as <build_depend> to package.xml
+  	==> also add it as <run_depend>
+  	
 
 ###########
 	
