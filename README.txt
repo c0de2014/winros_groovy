@@ -185,7 +185,44 @@ set(INSTALL_ROOT "C:/opt/ros/groovy/x86" CACHE PATH "Install root.")
 # now create a simple publisher and subscriber to thest the new msg-file
 
 
-
+  --> get ros_tutorials from github
+  cd c:\work\overlay\src
+  wstool set ros_tutorials --git https://github.com/ros/ros_tutorials.git -v groovy-devel
+  wstool update ros_tutorials
+  
+  --> copy folders "talker" and "listener" from: C:\work\overlay\src\ros_tutorials\roscpp_tutorials
+  	to: C:\work\overlay\src\
+  --> rename the new folders to my_talker and my_listener
+  --> change CMakeLists.txt in both folders to match the new package names (add my_.... to listener and talker)
+  	
+  	include_directories(${catkin_INCLUDE_DIRS})
+	add_executable(my_listener listener.cpp)
+	target_link_libraries(my_listener ${catkin_LIBRARIES})
+	install(TARGETS my_listener
+  	RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+  	
+      and
+      
+	include_directories(${catkin_INCLUDE_DIRS})
+	add_executable(my_talker talker.cpp)
+	target_link_libraries(my_talker ${catkin_LIBRARIES})
+	install(TARGETS my_talker
+  	RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+ 
+  --> remove "ros_tutorials"-folder because it contains a lot of dependencies that winros cannot resolve (yet)
+ 
+  remove folder: "C:\work\overlay\ros_tutorials"
+ 
+  --> build new packages (my_talker and my_listener)
+  
+  cd c:\work\overlay
+  setup.bat
+  winros_make --pre-clean
+  
+  --> should build to 100%
+  
+  --> test both scripts as they are now (with std_msgs)
+  
 ###########
 	
 
