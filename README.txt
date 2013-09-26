@@ -123,8 +123,8 @@ set(INSTALL_ROOT "C:/opt/ros/groovy/x86" CACHE PATH "Install root.")
 * turtle_actionlib - errors:
 	--> remove folder "turtle_actionlib" from ..\src\common_tutorials
 	
+###################################################################################################
 
-###########
 
 # create custom message-package and simple c++ publisher for that custom message-type
   http://wiki.ros.org/win_ros/hydro/Msvc%20Overlays#Creating_Packages
@@ -349,7 +349,7 @@ set(INSTALL_ROOT "C:/opt/ros/groovy/x86" CACHE PATH "Install root.")
   	devel\setup.bat  
   	build\my_listener\my_listener.exe
   
-  ==> talker should send, and listener receive..
+  ==> talker should send, and listener receive.. ( attribute "data" of type "std_msgs.String" )
   
 # change talker and listener to use custom-message
 
@@ -471,7 +471,7 @@ int main(int argc, char **argv)
 
 // %Tag(ROSCONSOLE)%
     //ROS_INFO("%s", msg.data.c_str());
-	ROS_INFO("%s", msg.num);
+	ROS_INFO("%d", msg.num);
 // %EndTag(ROSCONSOLE)%
 
     /**
@@ -689,9 +689,36 @@ my_listener\package.xml
 	
 </package>
 ---------------------------------------------------------------------------------------------------------------------
+
+
+# now test the modified talker and listener:
+
+  --> start roscore in a new terminal
+	
+	cd c:\work\overlay\
+  	devel\setup.bat
+  	roscore
+  	
+  --> start my_talker in a new terminal
+
+	cd c:\work\overlay\
+  	devel\setup.bat  
+  	build\my_talker\my_talker.exe
+  	
+  --> start my_listener in a new terminal
+
+	cd c:\work\overlay\
+  	devel\setup.bat  
+  	build\my_listener\my_listener.exe
+  
+  ==> talker should send, and listener receive.. ( attribute "num" of type "my_msg_pkg.Num" )
+
+
+
+==> DONE! everything worked as described (26.09.2013)
   
   
-###########
+
 	
 
 
