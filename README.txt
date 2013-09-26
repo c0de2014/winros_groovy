@@ -124,6 +124,48 @@ set(INSTALL_ROOT "C:/opt/ros/groovy/x86" CACHE PATH "Install root.")
 	--> remove folder "turtle_actionlib" from ..\src\common_tutorials
 	
 	
+
+###########
+
+# create custom message-package and simple c++ publisher for that custom message-type
+  http://wiki.ros.org/win_ros/hydro/Msvc%20Overlays#Creating_Packages
+
+  cd C:\work\overlay\src
+  ..\devel\setup.bat
+  winros_create_msg_pkg my_msg_pkg
+  
+--> Please edit package.xml, mainpage.dox, CMakeLists.txt, and add the package subdirectory.
+  
+# create custom msg- and config-files
+  http://wiki.ros.org/ROS/Tutorials/DefiningCustomMessages
+  
+  cd my_msg_pkg\msg
+  touch Num.msg
+  notepad Num.msg
+  --> insert: "int64 num"
+  cd ..
+  notepad package.xml
+  --> insert: " <build_depend>message_generation</build_depend>
+  		<run_depend>message_runtime</run_depend>"
+  notepad CMakeLists.txt
+  --> add "message_generation" to "find_package"-call
+      [    find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs message_generation)   ]
+  --> add "message_runtime" to "catkin_package"-call (if not exists, create after "message_generation"-call)
+      [    catkin_package(				]
+      [		...					]
+      [		CATKIN_DEPENDS message_runtime ...	]
+      [ 	...)					]
+  --> add "Num.msg" to "add_message_files"-call
+      [	   add_message_files(			]
+      [		FILES					]
+      [		Num.msg					]
+      [		)
+
+###########
+	
+	
+	
+	
 ###########################################################################
 # Issues to take a look at:
 
