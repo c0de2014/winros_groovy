@@ -329,6 +329,28 @@ set(INSTALL_ROOT "C:/opt/ros/groovy/x86" CACHE PATH "Install root.")
   -----------------------
   
   
+# test talker and listener with std_msgs
+
+  --> start roscore in a new terminal
+	
+	cd c:\work\overlay\
+  	devel\setup.bat
+  	roscore
+  	
+  --> start my_talker in a new terminal
+
+	cd c:\work\overlay\
+  	devel\setup.bat  
+  	build\my_talker\my_talker.exe
+  	
+  --> start my_listener in a new terminal
+
+	cd c:\work\overlay\
+  	devel\setup.bat  
+  	build\my_listener\my_listener.exe
+  
+  
+  
 ###########
 	
 
