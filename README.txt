@@ -181,9 +181,15 @@ set(INSTALL_ROOT "C:/opt/ros/groovy/x86" CACHE PATH "Install root.")
   	
   then try again to run "winros_make" from workspace-root-folder (e.g. c:\work\overlay )
   	==> should finish with 100%, and msg-files should have been created
+  	
+# now create a simple publisher and subscriber to thest the new msg-file
+
+
 
 ###########
 	
+
+
 	
 	
 	
