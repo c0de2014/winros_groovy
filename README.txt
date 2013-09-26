@@ -62,7 +62,7 @@ set(INSTALL_ROOT "C:/opt/ros/groovy/x86" CACHE PATH "Install root.")
 	
 	cd C:\work\overlay\src				# if overlay is not working as it should (see above), use C:\work\ws ..
 	wstool set common_tutorials --git https://github.com/ros/common_tutorials.git	# confirm with "y"
-	wstool update common_tutorials													# fetch sources for common_tutorials
+	wstool update common_tutorials			# if password needed, enter it "blind", it will not show on screen, but it should work			# fetch sources for common_tutorials
 
 # build new package
 
