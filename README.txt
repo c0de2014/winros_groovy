@@ -213,7 +213,7 @@ set(INSTALL_ROOT "C:/opt/ros/groovy/x86" CACHE PATH "Install root.")
  
   remove folder: "C:\work\overlay\ros_tutorials"
  
-  --> build new packages (my_talker and my_listener)
+# build new packages (my_talker and my_listener)
   
   cd c:\work\overlay
   setup.bat
@@ -221,7 +221,65 @@ set(INSTALL_ROOT "C:/opt/ros/groovy/x86" CACHE PATH "Install root.")
   
   --> should build to 100%
   
-  --> test both scripts as they are now (with std_msgs)
+# test both scripts as they are now (with std_msgs)
+  
+  devel\setup.bat
+  rosrun my_talker my_talker
+  
+  --> fails because package cannot be found
+
+
+# fix CMakeLists.txt and package.xml for both packages
+  
+  --> replace content of "my_talker" CMakeLists.txt with:
+  -------------------
+	cmake_minimum_required(VERSION 2.8.3)
+	project(my_talker)
+	
+	## Find catkin dependencies
+	find_package(catkin REQUIRED COMPONENTS roscpp)
+	
+	include_directories(${catkin_INCLUDE_DIRS})
+	
+	add_executable(my_talker talker.cpp)
+	target_link_libraries(my_talker ${catkin_LIBRARIES})
+	
+	catkin_package(CATKIN_DEPENDS message_runtime std_msgs)
+	
+	install(TARGETS my_talker RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+  ------------------
+  
+# create package.xml for both packages
+
+  cd c:\work\overlay\src\my_talker
+  touch package.xml
+  notepad package.xml
+  --> insert:
+  -----------------------
+  	<package>
+	  <name>my_talker</name>
+	  <version>0.0.1</version>
+	  <description>my_talker</description>
+	  <maintainer email="un@known.com">Un Known</maintainer>
+	
+	  <license>BSD</license>
+	
+	  <url type="website">http://www.google.com</url>
+
+	  <author email="un@known.com">Un Known</author>
+	
+	  <buildtool_depend>catkin</buildtool_depend>
+	
+	  <build_depend>roscpp</build_depend>
+	  <build_depend>std_msgs</build_depend>
+	
+	  <run_depend>roscpp</run_depend>
+	  <run_depend>std_msgs</run_depend>
+	  <run_depend>message_runtime</run_depend>
+	
+	</package>
+  -----------------------
+  
   
 ###########
 	
