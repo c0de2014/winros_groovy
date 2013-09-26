@@ -249,6 +249,24 @@ set(INSTALL_ROOT "C:/opt/ros/groovy/x86" CACHE PATH "Install root.")
 	install(TARGETS my_talker RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
   ------------------
   
+  --> replace content of "my_listener" CMakeLists.txt with:
+  -------------------
+	cmake_minimum_required(VERSION 2.8.3)
+	project(my_listener)
+	
+	## Find catkin dependencies
+	find_package(catkin REQUIRED COMPONENTS roscpp)
+	
+	include_directories(${catkin_INCLUDE_DIRS})
+	
+	add_executable(my_listener listener.cpp)
+	target_link_libraries(my_listener ${catkin_LIBRARIES})
+	
+	catkin_package(CATKIN_DEPENDS message_runtime std_msgs)
+	
+	install(TARGETS my_listener RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+  ------------------
+  
 # create package.xml for both packages
 
   cd c:\work\overlay\src\my_talker
@@ -260,6 +278,36 @@ set(INSTALL_ROOT "C:/opt/ros/groovy/x86" CACHE PATH "Install root.")
 	  <name>my_talker</name>
 	  <version>0.0.1</version>
 	  <description>my_talker</description>
+	  <maintainer email="un@known.com">Un Known</maintainer>
+	
+	  <license>BSD</license>
+	
+	  <url type="website">http://www.google.com</url>
+
+	  <author email="un@known.com">Un Known</author>
+	
+	  <buildtool_depend>catkin</buildtool_depend>
+	
+	  <build_depend>roscpp</build_depend>
+	  <build_depend>std_msgs</build_depend>
+	
+	  <run_depend>roscpp</run_depend>
+	  <run_depend>std_msgs</run_depend>
+	  <run_depend>message_runtime</run_depend>
+	
+	</package>
+  -----------------------
+
+
+  cd c:\work\overlay\src\my_listener
+  touch package.xml
+  notepad package.xml
+  --> insert:
+  -----------------------
+  	<package>
+	  <name>my_listener</name>
+	  <version>0.0.1</version>
+	  <description>my_listener</description>
 	  <maintainer email="un@known.com">Un Known</maintainer>
 	
 	  <license>BSD</license>
