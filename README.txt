@@ -8,18 +8,6 @@
 	  http://files.yujinrobot.com/repositories/windows/python/2.7/winros-python-build-tools-0.2.5.win32.msi
 	  
 
-'# optional: setup a "normal" workspace
-'
-'	## create workspace
-'	
-'	mkdir c:\work
-'	cd c:\work
-'	winros_init_workspace --track=groovy		# this option is not available if using winros_python_build_tools v 0.2.2
-'
-'	## init workspace
-'	
-'	...
-	
 # create overlay workspace
 
 	## create folder
@@ -64,6 +52,7 @@
 	cd c:\work\overlay
 	setup.bat
 	winros_make							# should not return any errors..
+
 	
 '# optional: test overlay workspace with ros: common_tutorials (- simple publisher and subscriber)
 '
@@ -104,6 +93,7 @@
 '	4) rosrun learning_actionlib fibonacci_client		# start fibonacci-client
 '	
 '	--> start of scripts, etc. might take some time, but should work.
+
 	
 # create custom message-package and simple c++ publisher and subscriber using that message-type
 	http://wiki.ros.org/win_ros/hydro/Msvc%20Overlays#Creating_Packages
@@ -150,6 +140,7 @@
 
 </package>
 ----------------------------------------------------------------------------------------------------------
+
 				  
 	## update: CMakeLists.txt
 	
@@ -211,14 +202,15 @@ install(DIRECTORY include/
         FILES_MATCHING PATTERN "*.h"
         PATTERN ".svn" EXCLUDE
         PATTERN ".git" EXCLUDE)
-
 ----------------------------------------------------------------------------------------------------------
+	
 	
 	## build my_msg_pkg:
 	
 	cd c:\work\overlay
 	devel\setup.bat
 	winros_make -pre--clean				# should finish with 100%
+	
 	
 # create simple publisher and subscriber that use a custom defined message-type (the one we created above..)
 	
@@ -264,6 +256,7 @@ install(DIRECTORY include/
 	</package>
 ----------------------------------------------------------------------------------------------------------	
 
+
 	notepad c:\work\overlay\src\listener\package.xml
 	--> if file does not exist, create it..
 	--> replace content with:			
@@ -292,6 +285,7 @@ install(DIRECTORY include/
 	</package>
 ----------------------------------------------------------------------------------------------------------			
 			
+			
 	## fix CMakeLists.txt for both packages
 
 	notepad c:\work\overlay\src\talker\CMakeLists.txt
@@ -313,6 +307,7 @@ install(DIRECTORY include/
 	install(TARGETS talker RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 ----------------------------------------------------------------------------------------------------------
 
+
 	notepad c:\work\overlay\src\listener\CMakeLists.txt
 	--> replace content with:
 ----------------------------------------------------------------------------------------------------------
@@ -331,6 +326,7 @@ install(DIRECTORY include/
 	
 	install(TARGETS listener RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 ----------------------------------------------------------------------------------------------------------
+	
 	
 '	## optional: test if packages build with std-msgs (talker and listener)
 '	
@@ -502,6 +498,7 @@ int main(int argc, char **argv)
 // %EndTag(FULLTEXT)%
 ----------------------------------------------------------------------------------------------------------
 
+
 	notepad c:\work\overlay\src\listener\listener.cpp
 	--> replace content with:
 ----------------------------------------------------------------------------------------------------------
@@ -601,6 +598,7 @@ int main(int argc, char **argv)
 // %EndTag(FULLTEXT)%
 ----------------------------------------------------------------------------------------------------------
 	
+	
 	## update CMakeLists.txt for both packages
 	notepad c:\work\overlay\src\talker\CMakeLists.txt
 	--> replace content with:
@@ -621,6 +619,7 @@ catkin_package(CATKIN_DEPENDS message_runtime std_msgs)
 install(TARGETS talker RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 ----------------------------------------------------------------------------------------------------------
 
+
 	notepad c:\work\overlay\src\listener\CMakeLists.txt
 	--> replace content with:
 ----------------------------------------------------------------------------------------------------------
@@ -639,6 +638,7 @@ catkin_package(CATKIN_DEPENDS message_runtime std_msgs)
 
 install(TARGETS listener RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 ----------------------------------------------------------------------------------------------------------
+
 
 	## update package.xml for both packages
 	notepad c:\work\overlay\src\talker\package.xml
@@ -669,6 +669,7 @@ install(TARGETS listener RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
   </package>
 ----------------------------------------------------------------------------------------------------------	
 
+
 	notepad c:\work\overlay\src\listener\package.xml
 	--> replace content with:	
 ----------------------------------------------------------------------------------------------------------
@@ -697,6 +698,7 @@ install(TARGETS listener RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 </package>
 ----------------------------------------------------------------------------------------------------------	
 	
+	
 	## build the modified packages
 	
 	cd c:\work\overlay
@@ -719,6 +721,17 @@ install(TARGETS listener RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 	
 	==> talker should send, and listener receive.. ( attribute "num" of type "my_msg_pkg.Num" )	
 
+
+DONE.
+
+my_msg_pkg		- custom message package
+talker			- modified ros_tutorials\talker to use custom message
+listener		- modified ros_tutorials\listener to use custom message
+
+
+
+
+##############################################################################################################
 ##############################################################################################################
 Issues to take a look at:
 	- rosrun does not find talker and listener packages..
