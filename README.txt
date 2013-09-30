@@ -14,7 +14,7 @@
 '	
 '	mkdir c:\work
 '	cd c:\work
-'	winros_init_workspace --track=groovy					# this option is not available if using winros_python_build_tools v 0.2.2
+'	winros_init_workspace --track=groovy		# this option is not available if using winros_python_build_tools v 0.2.2
 '
 '	## init workspace
 '	
@@ -36,9 +36,9 @@
 	
 	winros_init_build --underlays="C:/opt/ros/groovy/x86"	# ..make sure to link to the correct directory!! ..\groovy\.. or ..\hydro\..
 	
-!	## fix errors from winros_init_build script				# winros_python_build_tools 0.2.5 does not generate correct config.cmake file!
-															  --> this will cause an error about "Boost not found"
-															  --> to fix this just edit config.cmake as described in the next step
+!	## fix errors from winros_init_build script		# winros_python_build_tools 0.2.5 does not generate correct config.cmake file!
+								  --> this will cause an error about "Boost not found"
+								  --> to fix this just edit config.cmake as described in the next step
 	notepad c:\work\overlay\config.cmake
 		- change the following lines:
 ----------------------------------------------------------------------------------------------------------
@@ -55,7 +55,7 @@
 	
 	cd c:\work\overlay
 	setup.bat
-	winros_make									# if this fails because of missing "gtest", get it via svn
+	winros_make					# if this fails because of missing "gtest", get it via svn
 	
 	## download gtest via svn (if needed because winros_make failed..)
 	
@@ -63,24 +63,24 @@
 	svn checkout http://googletest.googlecode.com/svn/tags/release-1.6.0 gtest
 	cd c:\work\overlay
 	setup.bat
-	winros_make											# should not return any errors..
+	winros_make							# should not return any errors..
 	
 '# optional: test overlay workspace with ros: common_tutorials (- simple publisher and subscriber)
 '
 '	## add package-sources			# make sure to use parameter -v with correct option for your system (groovy/hydro)
-'									  ..choose the git-branch that fits your ros-enviroment (currently: master or hydro-devel)
+'						  ..choose the git-branch that fits your ros-enviroment (currently: master or hydro-devel)
 '	
 '	wstool set common_tutorials --git https://github.com/ros/common_tutorials.git -v master
 '	
 '	## fetch source-files
 '	
 '	wstool update common_tutorials	# if password needed, enter it "blind",
-'									  ..it will just not show on screen, but it should work
-'									  ..(or simply use git on shell manually to checkout the source code)
+'					  ..it will just not show on screen, but it should work
+'					  ..(or simply use git on shell manually to checkout the source code)
 '
 '	## remove packages from common_tutorials (because dependencies are not yet ported to winros):
-'	 .. just goto c:\work\overlay\src\common_tutorials and remove following package folders
-'	 .. (should also remove those packages from package.xml etc. ..but removing the folders works good enough)
+'	    .. just goto c:\work\overlay\src\common_tutorials and remove following package folders
+'	    .. (should also remove those packages from package.xml etc. ..but removing the folders works good enough)
 '	 - pluginlib
 '	 - nodelet_tutorial_math
 '	 - turtle_actionlib
@@ -98,8 +98,8 @@
 '	devel\setup.bat
 '	
 '	--> then start: roscore, rostopic, publisher, and subscriber
-'	1) roscore											# start ros-master
-'	2) rostopic echo /fibonacci/result					# listen on ros-topic
+'	1) roscore						# start ros-master
+'	2) rostopic echo /fibonacci/result			# listen on ros-topic
 '	3) rosrun learning_actionlib fibonacci_server		# start fibonacci-server
 '	4) rosrun learning_actionlib fibonacci_client		# start fibonacci-client
 '	
@@ -346,8 +346,8 @@ install(DIRECTORY include/
 '	devel\setup.bat
 '	
 '	--> then start: roscore, talker, and listener
-'	1) roscore											# start ros-master
-'	2) c:\work\overlay\build\talker\talker.exe			# start talker
+'	1) roscore						# start ros-master
+'	2) c:\work\overlay\build\talker\talker.exe		# start talker
 '	3) c:\work\overlay\build\listener\listener.exe		# start listener
 '
 '  	==> talker should send, and listener receive.. ( attribute "data" of type "std_msgs.String" )
@@ -712,8 +712,8 @@ install(TARGETS listener RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 	devel\setup.bat
 	
 	--> then start: roscore, talker, and listener
-	1) roscore											# start ros-master
-	2) c:\work\overlay\build\talker\talker.exe			# start talker
+	1) roscore						# start ros-master
+	2) c:\work\overlay\build\talker\talker.exe		# start talker
 	3) c:\work\overlay\build\listener\listener.exe		# start listener
 	
 	
@@ -724,7 +724,6 @@ Issues to take a look at:
 	- rosrun does not find talker and listener packages..
 	  --> why?
 	  --> workaround is to start talker.exe and listener.exe manually
-
 
 
 Troubleshooting:
