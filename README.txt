@@ -795,4 +795,6 @@ Troubleshooting:
 	- error because of windows/unix line-endings in .cpp or other files
 		--> use notepad++: edit -> line-endings conversion --> Unix-style
 	
-	- 
+	- Windows error message about roscpp.dll could not be found..:
+		--> forgot to "source" setup.bat
+		--> c:\work\overlay\devel\setup.bat
