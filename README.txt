@@ -26,9 +26,11 @@
 	winros_init_build --underlays="C:/opt/ros/groovy/x86"	# ..make sure to link to the correct directory!!
 								  ..\groovy\.. or ..\hydro\..
 	
-!	## fix errors from winros_init_build script	# winros_python_build_tools 0.2.5 does not generate correct config.cmake file!
+!	## fix errors from winros_init_build script	# winros_python_build_tools 0.2.5 does not generate
+							  correct config.cmake file!
 							  --> this will cause an error about "Boost not found"
-							  --> to fix this just edit config.cmake as described in the next steps
+							  --> to fix this just edit config.cmake as described in
+							      the next steps
 	notepad c:\work\overlay\config.cmake
 		- change the following lines:
 ----------------------------------------------------------------------------------------------------------
@@ -58,9 +60,10 @@
 	
 '# optional: test overlay workspace with ros: common_tutorials (- simple publisher and subscriber)
 '
-'	## add package-sources			# make sure to use parameter -v with correct option for your system (groovy/hydro)
+'	## add package-sources			# make sure to use parameter -v with correct option for your system
+'						  (groovy/hydro)
 '						  .. choose the git-branch that fits your ros-enviroment
-						  .. (currently: master or hydro-devel)
+'						  .. (currently: master or hydro-devel)
 '	
 '	wstool set common_tutorials --git https://github.com/ros/common_tutorials.git -v master
 '	
@@ -336,7 +339,7 @@ install(DIRECTORY include/
 '	cd c:\work\overlay
 '	setup.bat
 '	winros_make --pre-clean
-
+'
 '	## optional: test if packages run with std-msgs (talker and listener)
 '	
 '	--> open 3 new terminals
