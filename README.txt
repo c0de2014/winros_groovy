@@ -2,10 +2,11 @@
 
 	https://github.com/ipa-fxm-db/windows_ros-groovy
 	
-	- make sure to use rosdeps for groovy, when extracting rosdeps into c:\opt! (ros-wiki hydro tutorials link to rosdeps-hydro...)
-	  http://files.yujinrobot.com/win_ros/rosdeps/rosdeps-groovy-x86-vc10.zip
+	- make sure to use rosdeps for groovy, when extracting rosdeps into c:\opt!
+	  (ros-wiki hydro tutorials link to rosdeps-hydro...)
+	  	http://files.yujinrobot.com/win_ros/rosdeps/rosdeps-groovy-x86-vc10.zip
 	- use WinRos_Python_Build_Tools version 0.2.5
-	  http://files.yujinrobot.com/repositories/windows/python/2.7/winros-python-build-tools-0.2.5.win32.msi
+	  	http://files.yujinrobot.com/repositories/windows/python/2.7/winros-python-build-tools-0.2.5.win32.msi
 	  
 
 # create overlay workspace
@@ -22,11 +23,12 @@
 	
 	## create workspace overlay
 	
-	winros_init_build --underlays="C:/opt/ros/groovy/x86"	# ..make sure to link to the correct directory!! ..\groovy\.. or ..\hydro\..
+	winros_init_build --underlays="C:/opt/ros/groovy/x86"	# ..make sure to link to the correct directory!!
+								  ..\groovy\.. or ..\hydro\..
 	
-!	## fix errors from winros_init_build script		# winros_python_build_tools 0.2.5 does not generate correct config.cmake file!
-								  --> this will cause an error about "Boost not found"
-								  --> to fix this just edit config.cmake as described in the next step
+!	## fix errors from winros_init_build script	# winros_python_build_tools 0.2.5 does not generate correct config.cmake file!
+							  --> this will cause an error about "Boost not found"
+							  --> to fix this just edit config.cmake as described in the next steps
 	notepad c:\work\overlay\config.cmake
 		- change the following lines:
 ----------------------------------------------------------------------------------------------------------
@@ -43,7 +45,7 @@
 	
 	cd c:\work\overlay
 	setup.bat
-	winros_make					# if this fails because of missing "gtest", get it via svn
+	winros_make				# if this fails because of missing "gtest", get it via svn
 	
 	## download gtest via svn (if needed because winros_make failed..)
 	
@@ -51,21 +53,22 @@
 	svn checkout http://googletest.googlecode.com/svn/tags/release-1.6.0 gtest
 	cd c:\work\overlay
 	setup.bat
-	winros_make							# should not return any errors..
+	winros_make				# should not return any errors..
 
 	
 '# optional: test overlay workspace with ros: common_tutorials (- simple publisher and subscriber)
 '
 '	## add package-sources			# make sure to use parameter -v with correct option for your system (groovy/hydro)
-'						  ..choose the git-branch that fits your ros-enviroment (currently: master or hydro-devel)
+'						  .. choose the git-branch that fits your ros-enviroment
+						  .. (currently: master or hydro-devel)
 '	
 '	wstool set common_tutorials --git https://github.com/ros/common_tutorials.git -v master
 '	
 '	## fetch source-files
 '	
-'	wstool update common_tutorials	# if password needed, enter it "blind",
-'					  ..it will just not show on screen, but it should work
-'					  ..(or simply use git on shell manually to checkout the source code)
+'	wstool update common_tutorials		# if password needed, enter it "blind",
+'					  	  ..it will just not show on screen, but it should work
+'					  	  ..(or simply use git on shell manually to checkout the source code)
 '
 '	## remove packages from common_tutorials (because dependencies are not yet ported to winros):
 '	    .. just goto c:\work\overlay\src\common_tutorials and remove following package folders
@@ -740,7 +743,8 @@ Issues to take a look at:
 
 
 Troubleshooting:
-	- make sure to use rosdeps for groovy, when extracting rosdeps into c:\opt! (ros-wiki hydro tutorials link to rosdeps-hydro...)
+	- make sure to use rosdeps for groovy, when extracting rosdeps into c:\opt!
+	  (ros-wiki hydro tutorials link to rosdeps-hydro...)
 		http://files.yujinrobot.com/win_ros/rosdeps/rosdeps-groovy-x86-vc10.zip
 	  
 	- use WinRos_Python_Build_Tools version 0.2.5
@@ -762,7 +766,8 @@ Troubleshooting:
 		
 	- "gtest" not found: download gtest via svn (if needed because winros_make failed..)
 		--> solution is described in error-message:
-			You can run 'svn checkout http://googletest.googlecode.com/svn/tags/release-1.6.0 gtest' in the root of your workspace
+			"You can run 'svn checkout http://googletest.googlecode.com/svn/tags/release-1.6.0 gtest'
+			 in the root of your workspace"
 		--> root of workspace means c:\work\overlay\src
 		cd c:\work\overlay\src
 		svn checkout http://googletest.googlecode.com/svn/tags/release-1.6.0 gtest
