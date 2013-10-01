@@ -44,9 +44,11 @@
 	set(ROSDEPS_ROOT "C:/opt/rosdeps/hydro/x86" CACHE STRING "System root for ros dependency.")
 	set(INSTALL_ROOT "C:/opt/overlay/hydro/x86" CACHE PATH "Install root.")
 ------------------------------------------------------------------------------------------
+		
 		... into:
-------------------------------------------------------------------------------------------		
+		
 --- https://github.com/ipa-fxm-db/winros_groovy/blob/master/work/overlay/config.cmake ----
+------------------------------------------------------------------------------------------		
 	set(ROSDEPS_ROOT "C:/opt/rosdeps/groovy/x86" CACHE STRING "System root for ros dependency.")
 	set(INSTALL_ROOT "C:/opt/ros/groovy/x86" CACHE PATH "Install root.")
 ------------------------------------------------------------------------------------------
@@ -143,6 +145,7 @@
 	cd c:\work\overlay\src\my_msg_pkg
 	notepad package.xml
 --- https://github.com/ipa-fxm-db/winros_groovy/blob/master/work/overlay/src/my_msg_pkg/package.xml
+------------------------------------------------------------------------------------------		
 <package>
   <name>my_msg_pkg</name>
   <version>0.1.0</version>
@@ -170,6 +173,7 @@
 	
 	notepad CMake_Lists.txt
 --- https://github.com/ipa-fxm-db/winros_groovy/blob/master/work/overlay/src/my_msg_pkg/CMakeLists.txt
+------------------------------------------------------------------------------------------		
 ##############################################################################
 # CMake
 ##############################################################################
@@ -236,7 +240,8 @@ install(DIRECTORY include/
 	winros_make -pre--clean				# should finish with 100%
 	
 	
-# create simple publisher and subscriber that use a custom defined message-type (the one we created above..)
+# create simple publisher and subscriber that use a custom defined message-type (the one
+  we just created..)
 	
 	## get ros_tutorials from github
 	
@@ -244,12 +249,13 @@ install(DIRECTORY include/
 	wstool set ros_tutorials --git https://github.com/ros/ros_tutorials.git -v groovy-devel
 	wstool update ros_tutorials
 	
-	## create folders and files for talker and listener (those will make use of the custom-message Num.msg)
+	## create folders and files for talker and listener (those will make use of the
+	   custom-message Num.msg)
 	
-		--> copy folders "talker" and "listener from: C:\work\overlay\src\ros_tutorials\roscpp_tutorials
-				to: C:\work\overlay\src\
-		--> remove C:\work\overlay\src\ros_tutorials
-			to avoid dependency problems with tutorials that don't run with winros yet
+	--> copy folders "talker" and "listener from: C:\work\overlay\src\ros_tutorials\roscpp_tutorials
+		to: C:\work\overlay\src\
+	--> remove C:\work\overlay\src\ros_tutorials
+		to avoid dependency problems with tutorials that don't run with winros yet
 
 	## create package.xml for both packages (talker and listener)
 	
