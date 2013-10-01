@@ -23,13 +23,17 @@
 	
 	## create workspace overlay
 	
-	winros_init_build --underlays="C:/opt/ros/groovy/x86"	# ..make sure to link to the correct directory!!
+	winros_init_build --underlays="C:/opt/ros/groovy/x86"	# ..make sure to link to
+								  the correct directory!!
 								  ..\groovy\.. or ..\hydro\..
 	
-!	## fix errors from winros_init_build script	# winros_python_build_tools 0.2.5 does not generate
-							  correct config.cmake file!
-							  --> this will cause an error about "Boost not found"
-							  --> to fix this just edit config.cmake as described in
+!	## fix errors from winros_init_build script	# winros_python_build_tools 0.2.5
+							  does not generate correct
+							  config.cmake file!
+							  --> this will cause an error about
+							      "Boost not found"
+							  --> to fix this just edit
+							      config.cmake as described in
 							      the next steps
 	notepad c:\work\overlay\config.cmake
 		- change the following lines:
