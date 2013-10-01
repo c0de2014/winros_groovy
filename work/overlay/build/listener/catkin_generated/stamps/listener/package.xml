@@ -1,0 +1,23 @@
+  <package>
+	  <name>listener</name>
+	  <version>0.0.1</version>
+	  <description>listener</description>
+	  <maintainer email="un@known.com">Un Known</maintainer>
+	
+	  <license>BSD</license>
+	
+	  <url type="website">http://www.google.com</url>
+
+	  <author email="un@known.com">Un Known</author>
+	
+	  <buildtool_depend>catkin</buildtool_depend>
+	
+	  <build_depend>roscpp</build_depend>
+	  <build_depend>my_msg_pkg</build_depend>
+	
+	  <run_depend>roscpp</run_depend>
+	  <run_depend>my_msg_pkg</run_depend>
+	  <run_depend>std_msgs</run_depend>
+	  <run_depend>message_runtime</run_depend>
+	
+</package>
