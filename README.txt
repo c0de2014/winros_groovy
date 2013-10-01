@@ -25,16 +25,16 @@
 	
 	winros_init_build --underlays="C:/opt/ros/groovy/x86"	# ..make sure to link to
 								  the correct directory!!
-								  ..\groovy\.. or ..\hydro\..
+								  \groovy\ or \hydro\
 	
 !	## fix errors from winros_init_build script	# winros_python_build_tools 0.2.5
 							  does not generate correct
 							  config.cmake file!
-							  --> this will cause an error about
-							      "Boost not found"
+							  --> this will cause an error
+							      about "Boost not found"
 							  --> to fix this just edit
-							      config.cmake as described in
-							      the next steps
+							      config.cmake as described
+							      in the next steps
 	notepad c:\work\overlay\config.cmake
 		- change the following lines:
 ----------------------------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@
 	set(INSTALL_ROOT "C:/opt/overlay/hydro/x86" CACHE PATH "Install root.")
 ----------------------------------------------------------------------------------------------------------
 		... into:
-----------------------------------------------------------------------------------------------------------
+--- https://github.com/ipa-fxm-db/winros_groovy/blob/master/work/overlay/config.cmake --------------------
 	set(ROSDEPS_ROOT "C:/opt/rosdeps/groovy/x86" CACHE STRING "System root for ros dependency.")
 	set(INSTALL_ROOT "C:/opt/ros/groovy/x86" CACHE PATH "Install root.")
 ----------------------------------------------------------------------------------------------------------
