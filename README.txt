@@ -73,7 +73,8 @@
 '	## add package-sources			# make sure to use parameter -v with
 '						  correct option for your system
 '						    (groovy/hydro)
-'						  .. choose the git-branch that fits your ros-enviroment
+'						  .. choose the git-branch that fits your
+'						     ros-enviroment
 '						  .. (currently: master or hydro-devel)
 '	
 '	wstool set common_tutorials --git https://github.com/ros/common_tutorials.git -v master
@@ -91,7 +92,7 @@
 '	    .. just goto c:\work\overlay\src\common_tutorials and remove following
 '	       package folders
 '	    .. (should also remove those packages from package.xml etc. ..but removing
-	       the folders works good enough, atm)
+'	       the folders works good enough, atm)
 '	 - pluginlib
 '	 - nodelet_tutorial_math
 '	 - turtle_actionlib
@@ -139,9 +140,9 @@
 	
 	## update: package.xml
 	
-	cd c:\work\overlay
+	cd c:\work\overlay\src\my_msg_pkg
 	notepad package.xml
-------------------------------------------------------------------------------------------
+--- https://github.com/ipa-fxm-db/winros_groovy/blob/master/work/overlay/src/my_msg_pkg/package.xml
 <package>
   <name>my_msg_pkg</name>
   <version>0.1.0</version>
@@ -168,7 +169,7 @@
 	## update: CMakeLists.txt
 	
 	notepad CMake_Lists.txt
-----------------------------------------------------------------------------------------------------------		
+--- https://github.com/ipa-fxm-db/winros_groovy/blob/master/work/overlay/src/my_msg_pkg/CMakeLists.txt
 ##############################################################################
 # CMake
 ##############################################################################
