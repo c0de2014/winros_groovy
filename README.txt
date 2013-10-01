@@ -37,15 +37,15 @@
 							      in the next steps
 	notepad c:\work\overlay\config.cmake
 		- change the following lines:
-----------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
 	set(ROSDEPS_ROOT "C:/opt/rosdeps/hydro/x86" CACHE STRING "System root for ros dependency.")
 	set(INSTALL_ROOT "C:/opt/overlay/hydro/x86" CACHE PATH "Install root.")
-----------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
 		... into:
---- https://github.com/ipa-fxm-db/winros_groovy/blob/master/work/overlay/config.cmake --------------------
+--- https://github.com/ipa-fxm-db/winros_groovy/blob/master/work/overlay/config.cmake ----
 	set(ROSDEPS_ROOT "C:/opt/rosdeps/groovy/x86" CACHE STRING "System root for ros dependency.")
 	set(INSTALL_ROOT "C:/opt/ros/groovy/x86" CACHE PATH "Install root.")
-----------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
 
 	## try to build the overlay-workspace
 	
