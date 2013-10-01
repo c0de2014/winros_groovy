@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "listener")
+set(listener_MAINTAINER "Un Known <un@known.com>")
+set(listener_DEPRECATED "")
+set(listener_VERSION "0.0.1")
+set(listener_BUILD_DEPENDS "roscpp" "my_msg_pkg")
+set(listener_RUN_DEPENDS "roscpp" "my_msg_pkg" "std_msgs" "message_runtime")
+set(listener_BUILDTOOL_DEPENDS "catkin")
