@@ -42,6 +42,7 @@
 	set(INSTALL_ROOT "C:/opt/overlay/hydro/x86" CACHE PATH "Install root.")
 ------------------------------------------------------------------------------------------
 		... into:
+------------------------------------------------------------------------------------------		
 --- https://github.com/ipa-fxm-db/winros_groovy/blob/master/work/overlay/config.cmake ----
 	set(ROSDEPS_ROOT "C:/opt/rosdeps/groovy/x86" CACHE STRING "System root for ros dependency.")
 	set(INSTALL_ROOT "C:/opt/ros/groovy/x86" CACHE PATH "Install root.")
@@ -51,7 +52,8 @@
 	
 	cd c:\work\overlay
 	setup.bat
-	winros_make				# if this fails because of missing "gtest", get it via svn
+	winros_make				# if this fails because of missing
+						  "gtest", get it via svn
 	
 	## download gtest via svn (if needed because winros_make failed..)
 	
@@ -62,10 +64,12 @@
 	winros_make				# should not return any errors..
 
 	
-'# optional: test overlay workspace with ros: common_tutorials (- simple publisher and subscriber)
+'# optional: test overlay workspace with ros: common_tutorials
+'  (- simple publisher and subscriber)
 '
-'	## add package-sources			# make sure to use parameter -v with correct option for your system
-'						  (groovy/hydro)
+'	## add package-sources			# make sure to use parameter -v with
+'						  correct option for your system
+'						    (groovy/hydro)
 '						  .. choose the git-branch that fits your ros-enviroment
 '						  .. (currently: master or hydro-devel)
 '	
@@ -74,12 +78,17 @@
 '	## fetch source-files
 '	
 '	wstool update common_tutorials		# if password needed, enter it "blind",
-'					  	  ..it will just not show on screen, but it should work
-'					  	  ..(or simply use git on shell manually to checkout the source code)
+'					  	  ..it will just not show on screen, but
+'						  it should work
+'					  	  ..(or simply use git on shell manually
+'						  to checkout the source code)
 '
-'	## remove packages from common_tutorials (because dependencies are not yet ported to winros):
-'	    .. just goto c:\work\overlay\src\common_tutorials and remove following package folders
-'	    .. (should also remove those packages from package.xml etc. ..but removing the folders works good enough)
+'	## remove packages from common_tutorials (because dependencies are not yet ported
+'	   to winros):
+'	    .. just goto c:\work\overlay\src\common_tutorials and remove following
+'	       package folders
+'	    .. (should also remove those packages from package.xml etc. ..but removing
+	       the folders works good enough, atm)
 '	 - pluginlib
 '	 - nodelet_tutorial_math
 '	 - turtle_actionlib
@@ -105,7 +114,8 @@
 '	--> start of scripts, etc. might take some time, but should work.
 
 	
-# create custom message-package and simple c++ publisher and subscriber using that message-type
+# create custom message-package and simple c++ publisher and subscriber using that
+  message-type
 	http://wiki.ros.org/win_ros/hydro/Msvc%20Overlays#Creating_Packages
 	
 	## create the package folder
@@ -128,7 +138,7 @@
 	
 	cd c:\work\overlay
 	notepad package.xml
-----------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
 <package>
   <name>my_msg_pkg</name>
   <version>0.1.0</version>
@@ -149,7 +159,7 @@
   <run_depend>std_msgs</run_depend>
 
 </package>
-----------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
 
 				  
 	## update: CMakeLists.txt
