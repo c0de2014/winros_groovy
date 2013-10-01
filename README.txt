@@ -230,7 +230,7 @@ install(DIRECTORY include/
         FILES_MATCHING PATTERN "*.h"
         PATTERN ".svn" EXCLUDE
         PATTERN ".git" EXCLUDE)
-----------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
 	
 	
 	## build my_msg_pkg:
@@ -285,7 +285,7 @@ install(DIRECTORY include/
 		<run_depend>message_runtime</run_depend>
 
 	</package>
-----------------------------------------------------------------------------------------------------------	
+------------------------------------------------------------------------------------------
 
 
 	notepad c:\work\overlay\src\listener\package.xml
@@ -315,7 +315,7 @@ install(DIRECTORY include/
 	  <run_depend>message_runtime</run_depend>
 	
 	</package>
-----------------------------------------------------------------------------------------------------------			
+------------------------------------------------------------------------------------------
 			
 			
 	## fix CMakeLists.txt for both packages
@@ -338,7 +338,7 @@ install(DIRECTORY include/
 	catkin_package(CATKIN_DEPENDS message_runtime std_msgs)
 	
 	install(TARGETS talker RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
-----------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
 
 
 	notepad c:\work\overlay\src\listener\CMakeLists.txt
@@ -359,7 +359,7 @@ install(DIRECTORY include/
 	catkin_package(CATKIN_DEPENDS message_runtime std_msgs)
 	
 	install(TARGETS listener RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
-----------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
 	
 	
 '	## optional: test if packages build with std-msgs (talker and listener)
@@ -533,7 +533,7 @@ int main(int argc, char **argv)
   return 0;
 }
 // %EndTag(FULLTEXT)%
-----------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
 
 
 	notepad c:\work\overlay\src\listener\listener.cpp
@@ -634,7 +634,7 @@ int main(int argc, char **argv)
   return 0;
 }
 // %EndTag(FULLTEXT)%
-----------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
 	
 	
 	## update CMakeLists.txt for both packages
@@ -656,13 +656,13 @@ target_link_libraries(talker ${catkin_LIBRARIES})
 catkin_package(CATKIN_DEPENDS message_runtime std_msgs)
 
 install(TARGETS talker RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
-----------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
 
 
 	notepad c:\work\overlay\src\listener\CMakeLists.txt
 	--> replace content with:
 --- https://github.com/ipa-fxm-db/winros_groovy/blob/master/work/overlay/src/listener/CMakeLists.txt
----------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
 cmake_minimum_required(VERSION 2.8.3)
 project(listener)
 
@@ -677,14 +677,14 @@ target_link_libraries(listener ${catkin_LIBRARIES})
 catkin_package(CATKIN_DEPENDS message_runtime std_msgs)
 
 install(TARGETS listener RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
-----------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
 
 
 	## update package.xml for both packages
 	notepad c:\work\overlay\src\talker\package.xml
 	--> replace content with:
 --- https://github.com/ipa-fxm-db/winros_groovy/blob/master/work/overlay/src/talker/package.xml
----------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
   <package>
 	  <name>talker</name>
 	  <version>0.0.1</version>
@@ -708,13 +708,13 @@ install(TARGETS listener RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 	  <run_depend>message_runtime</run_depend>
 	
   </package>
-----------------------------------------------------------------------------------------------------------	
+------------------------------------------------------------------------------------------
 
 
 	notepad c:\work\overlay\src\listener\package.xml
 	--> replace content with:	
 --- https://github.com/ipa-fxm-db/winros_groovy/blob/master/work/overlay/src/listener/package.xml --
-----------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
   <package>
 	  <name>listener</name>
 	  <version>0.0.1</version>
@@ -738,7 +738,7 @@ install(TARGETS listener RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 	  <run_depend>message_runtime</run_depend>
 	
 </package>
-----------------------------------------------------------------------------------------------------------	
+------------------------------------------------------------------------------------------
 	
 	
 	## build the modified packages
@@ -774,8 +774,8 @@ listener		- modified ros_tutorials\listener to use custom message
 
 
 
-##############################################################################################################
-##############################################################################################################
+##########################################################################################
+##########################################################################################
 Issues to take a look at:
 	- rosrun does not find talker and listener packages..
 	  --> why?
@@ -792,19 +792,21 @@ Troubleshooting:
 	  
 	- winros_python_build_tools 0.2.5 does not generate correct config.cmake file!
 		--> this will cause an error about "Boost not found"
-		--> to fix this just edit config.cmake as described, change the following lines:
+		--> to fix this just edit config.cmake as described, change the following
+		    lines:
 		notepad c:\work\overlay\config.cmake
-		----------------------------------------------------------------------------------------------------------
+		--------------------------------------------------------------------------
 			set(ROSDEPS_ROOT "C:/opt/rosdeps/hydro/x86" CACHE STRING "System root for ros dependency.")
 			set(INSTALL_ROOT "C:/opt/overlay/hydro/x86" CACHE PATH "Install root.")
-		----------------------------------------------------------------------------------------------------------
+		--------------------------------------------------------------------------
 			... into:
-		----------------------------------------------------------------------------------------------------------
+		--------------------------------------------------------------------------
 			set(ROSDEPS_ROOT "C:/opt/rosdeps/groovy/x86" CACHE STRING "System root for ros dependency.")
 			set(INSTALL_ROOT "C:/opt/ros/groovy/x86" CACHE PATH "Install root.")
-		----------------------------------------------------------------------------------------------------------
+		--------------------------------------------------------------------------
 		
-	- "gtest" not found: download gtest via svn (if needed because winros_make failed..)
+	- "gtest" not found: download gtest via svn (if needed because winros_make
+	  failed..)
 		--> solution is described in error-message:
 			"You can run 'svn checkout http://googletest.googlecode.com/svn/tags/release-1.6.0 gtest'
 			 in the root of your workspace"
@@ -814,8 +816,10 @@ Troubleshooting:
 		
 	- build-errors because of missing (/not yet ported) dependencies:
 		remove packages from common_tutorials
-		.. just goto c:\work\overlay\src\common_tutorials and remove following package folders
-		.. (should also remove those packages from package.xml etc. ..but removing the folders works good enough)
+		.. just goto c:\work\overlay\src\common_tutorials and remove following
+		   package folders
+		.. (should also remove those packages from package.xml etc. ..but
+		   removing the folders works good enough)
 		- pluginlib
 		- nodelet_tutorial_math
 		- turtle_actionlib
@@ -823,11 +827,13 @@ Troubleshooting:
 	- Boost-Errors:
 		--> forgot to extract rosdeps into c:\opt ?
 		  (this is described here: https://github.com/ipa-fxm-db/windows_ros-groovy)
-		--> make sure you extracted the correct package for your ros-version. there are different downloads for groovy and hydro!
+		--> make sure you extracted the correct package for your ros-version.
+		    there are different downloads for groovy and hydro!
 	
 	- genaction.py gets opened in editor instead of being called to generate msg-files
 		--> https://3c.gmx.net/mail/client/dereferrer?redirectUrl=http%3A%2F%2Fstackoverflow.com%2Fquestions%2F7690150%2Fpython-sys-argv-out-of-range-dont-understand-why
-		--> SOLUTION: just right-click a .py file and choose python.exe as default programm for all .py files
+		--> SOLUTION: just right-click a .py file and choose python.exe as
+		    default programm for all .py files
 	
 	- error because of windows/unix line-endings in .cpp or other files
 		--> use notepad++: edit -> line-endings conversion --> Unix-style
