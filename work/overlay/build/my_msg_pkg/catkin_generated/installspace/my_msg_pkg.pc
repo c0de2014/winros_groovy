@@ -1,6 +1,0 @@
-Name: my_msg_pkg
-Description: Description of my_msg_pkg
-Version: 0.1.0
-Cflags: -IC:/opt/ros/groovy/x86/include
-Libs: -LC:/opt/ros/groovy/x86/lib 
-Requires: message_runtime std_msgs

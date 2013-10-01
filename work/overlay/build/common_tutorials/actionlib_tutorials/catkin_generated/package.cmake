@@ -1,7 +1,0 @@
-set(_CATKIN_CURRENT_PACKAGE "learning_actionlib")
-set(learning_actionlib_MAINTAINER "Isaac Saito <isaito@willowgarage.com>")
-set(learning_actionlib_DEPRECATED "")
-set(learning_actionlib_VERSION "0.0.0")
-set(learning_actionlib_BUILD_DEPENDS "roscpp" "actionlib" "message_generation" "std_msgs" "actionlib_msgs")
-set(learning_actionlib_RUN_DEPENDS "roscpp" "actionlib" "message_generation")
-set(learning_actionlib_BUILDTOOL_DEPENDS "catkin")

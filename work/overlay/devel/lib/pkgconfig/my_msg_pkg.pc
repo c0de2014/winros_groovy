@@ -1,6 +1,0 @@
-Name: my_msg_pkg
-Description: Description of my_msg_pkg
-Version: 0.1.0
-Cflags: -IC:/work/overlay/devel/include
-Libs: -LC:/work/overlay/devel/lib 
-Requires: message_runtime std_msgs

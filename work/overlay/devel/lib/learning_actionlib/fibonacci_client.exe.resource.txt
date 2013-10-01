@@ -1,1 +1,0 @@
-1 /* CREATEPROCESS_MANIFEST_RESOURCE_ID */ 24 /* RT_MANIFEST */ "C:/work/overlay/devel/lib/learning_actionlib/fibonacci_client.exe.embed.manifest"

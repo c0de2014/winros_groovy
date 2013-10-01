@@ -1,7 +1,0 @@
-set(_CATKIN_CURRENT_PACKAGE "my_msg_pkg")
-set(my_msg_pkg_MAINTAINER "Admin <Admin@gmail.com>")
-set(my_msg_pkg_DEPRECATED "")
-set(my_msg_pkg_VERSION "0.1.0")
-set(my_msg_pkg_BUILD_DEPENDS "message_generation" "std_msgs")
-set(my_msg_pkg_RUN_DEPENDS "message_runtime" "std_msgs")
-set(my_msg_pkg_BUILDTOOL_DEPENDS "catkin")
