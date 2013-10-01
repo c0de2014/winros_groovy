@@ -262,7 +262,8 @@ install(DIRECTORY include/
 	notepad c:\work\overlay\src\talker\package.xml
 	--> if file does not exist, create it..
 	--> replace content with:
-----------------------------------------------------------------------------------------------------------
+--- this file gets modified again, therefor no link here ---------------------------------
+------------------------------------------------------------------------------------------		
 	<package>
 		<name>talker</name>
 		<version>0.0.1</version>
@@ -290,7 +291,8 @@ install(DIRECTORY include/
 	notepad c:\work\overlay\src\listener\package.xml
 	--> if file does not exist, create it..
 	--> replace content with:			
-----------------------------------------------------------------------------------------------------------
+--- this file gets modified again, therefor no link here ---------------------------------
+------------------------------------------------------------------------------------------		
   	<package>
 	  <name>listener</name>
 	  <version>0.0.1</version>
@@ -320,7 +322,8 @@ install(DIRECTORY include/
 
 	notepad c:\work\overlay\src\talker\CMakeLists.txt
 	--> replace content with:
-----------------------------------------------------------------------------------------------------------
+--- this file gets modified again, therefor no link here ---------------------------------
+------------------------------------------------------------------------------------------		
 	cmake_minimum_required(VERSION 2.8.3)
 	project(talker)
 	
@@ -340,7 +343,8 @@ install(DIRECTORY include/
 
 	notepad c:\work\overlay\src\listener\CMakeLists.txt
 	--> replace content with:
-----------------------------------------------------------------------------------------------------------
+--- this file gets modified again, therefor no link here ---------------------------------
+------------------------------------------------------------------------------------------		
 	cmake_minimum_required(VERSION 2.8.3)
 	project(listener)
 	
@@ -376,15 +380,18 @@ install(DIRECTORY include/
 '	2) c:\work\overlay\build\talker\talker.exe		# start talker
 '	3) c:\work\overlay\build\listener\listener.exe		# start listener
 '
-'  	==> talker should send, and listener receive.. ( attribute "data" of type "std_msgs.String" )
+'  	==> talker should send, and listener receive..
+'	    ( attribute "data" of type "std_msgs.String" )
 
 
 
-	## modify talker and listener source-files to use the custom-message from my_msg_pkg
+	## modify talker and listener source-files to use the custom-message from
+	   my_msg_pkg
 	
 	notepad c:\work\overlay\src\talker\talker.cpp
 	--> replace content with:
-----------------------------------------------------------------------------------------------------------
+--- https://github.com/ipa-fxm-db/winros_groovy/blob/master/work/overlay/src/talker/talker.cpp
+------------------------------------------------------------------------------------------
 /*
  * Copyright (C) 2008, Morgan Quigley and Willow Garage, Inc.
  *
@@ -531,7 +538,8 @@ int main(int argc, char **argv)
 
 	notepad c:\work\overlay\src\listener\listener.cpp
 	--> replace content with:
-----------------------------------------------------------------------------------------------------------
+--- https://github.com/ipa-fxm-db/winros_groovy/blob/master/work/overlay/src/listener/listener.cpp
+------------------------------------------------------------------------------------------
 /*
  * Copyright (C) 2008, Morgan Quigley and Willow Garage, Inc.
  *
@@ -632,7 +640,8 @@ int main(int argc, char **argv)
 	## update CMakeLists.txt for both packages
 	notepad c:\work\overlay\src\talker\CMakeLists.txt
 	--> replace content with:
-----------------------------------------------------------------------------------------------------------
+--- https://github.com/ipa-fxm-db/winros_groovy/blob/master/work/overlay/src/talker/CMakeLists.txt
+------------------------------------------------------------------------------------------
 cmake_minimum_required(VERSION 2.8.3)
 project(talker)
 
@@ -652,7 +661,8 @@ install(TARGETS talker RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
 	notepad c:\work\overlay\src\listener\CMakeLists.txt
 	--> replace content with:
-----------------------------------------------------------------------------------------------------------
+--- https://github.com/ipa-fxm-db/winros_groovy/blob/master/work/overlay/src/listener/CMakeLists.txt
+---------------------------------------------------------------------------------------------------
 cmake_minimum_required(VERSION 2.8.3)
 project(listener)
 
@@ -673,7 +683,8 @@ install(TARGETS listener RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 	## update package.xml for both packages
 	notepad c:\work\overlay\src\talker\package.xml
 	--> replace content with:
-----------------------------------------------------------------------------------------------------------
+--- https://github.com/ipa-fxm-db/winros_groovy/blob/master/work/overlay/src/talker/package.xml
+---------------------------------------------------------------------------------------------------
   <package>
 	  <name>talker</name>
 	  <version>0.0.1</version>
@@ -702,7 +713,8 @@ install(TARGETS listener RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
 	notepad c:\work\overlay\src\listener\package.xml
 	--> replace content with:	
-----------------------------------------------------------------------------------------------------------
+--- https://github.com/ipa-fxm-db/winros_groovy/blob/master/work/overlay/src/listener/package.xml --
+----------------------------------------------------------------------------------------------------
   <package>
 	  <name>listener</name>
 	  <version>0.0.1</version>
@@ -749,7 +761,8 @@ install(TARGETS listener RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 	3) c:\work\overlay\build\listener\listener.exe		# start listener
 	
 	
-	==> talker should send, and listener receive.. ( attribute "num" of type "my_msg_pkg.Num" )	
+	==> talker should send, and listener receive..
+	    ( attribute "num" of type "my_msg_pkg.Num" )	
 
 
 DONE.
